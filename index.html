@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Obrigado pela compra!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obrigado pela sua compra!</title>
 
   <!-- Meta Pixel Code -->
   <script>
@@ -19,75 +20,81 @@
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1193017659526800&ev=PageView&noscript=1"/>
+         src="https://www.facebook.com/tr?id=1193017659526800&ev=PageView&noscript=1"/>
   </noscript>
   <!-- End Meta Pixel Code -->
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      background: #f9f9f9;
+      padding: 40px;
       text-align: center;
-      padding: 40px 20px;
     }
+
     h1 {
-      color: #00c851;
+      color: #2ecc71;
     }
+
     p {
+      margin-top: 10px;
       font-size: 18px;
-      margin-bottom: 30px;
     }
-    #btn {
+
+    button {
       background-color: #25D366;
       color: white;
+      border: none;
       padding: 15px 25px;
       font-size: 18px;
-      border: none;
       border-radius: 8px;
       cursor: pointer;
+      margin-top: 20px;
     }
-    #codigo {
+
+    button:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
+
+    .codigo {
       font-size: 22px;
       margin-top: 20px;
       font-weight: bold;
-      color: #333;
     }
   </style>
 </head>
 <body>
+
   <h1>✅ Obrigado pela sua compra!</h1>
-  <p>Clique no botão abaixo para gerar seu código de compra e envie no WhatsApp.</p>
+  <p>Clique abaixo para gerar seu código de compra e me envie no WhatsApp.</p>
 
-  <button id="btn" onclick="gerarCodigo()">Gerar código e ir para o WhatsApp</button>
+  <button id="gerarBtn" onclick="gerarCodigo()">Gerar código e ir para o WhatsApp</button>
 
-  <div id="codigo"></div>
+  <div id="codigo" class="codigo"></div>
 
   <script>
     function gerarCodigo() {
-      // Evitar múltiplas marcações
-      if (localStorage.getItem('vendaRegistrada')) {
-        alert("Você já gerou seu código.");
-        return;
-      }
+      // Impede cliques adicionais
+      const btn = document.getElementById('gerarBtn');
+      btn.disabled = true;
 
-      // Gera número aleatório entre 1 e 200
-      var numero = Math.floor(Math.random() * 200) + 1;
+      // Gera número de 1 a 200
+      const codigo = Math.floor(Math.random() * 200) + 1;
+      document.getElementById('codigo').innerText = "Seu código: " + codigo;
 
-      // Mostra na tela
-      document.getElementById("codigo").innerText = "Seu código: #" + numero;
+      // Dispara o evento de compra (venda)
+      fbq('track', 'Purchase', {
+        value: 0.00,
+        currency: 'BRL'
+      });
 
-      // Marca o evento de compra
-      fbq('track', 'Purchase');
-
-      // Salva localmente pra não marcar de novo
-      localStorage.setItem('vendaRegistrada', 'true');
-
-      // Redireciona para WhatsApp após 2 segundos
-      setTimeout(function() {
-        window.location.href = "https://wa.me/5599999999999?text=Meu%20código%20de%20compra%20é%20%23" + numero;
-      }, 2000);
+      // Redireciona com o código no WhatsApp
+      setTimeout(() => {
+        window.location.href = `https://wa.me/5599999999999?text=Olá!%20Meu%20código%20de%20compra%20é%20${codigo}`;
+      }, 2000); // espera 2 segundos antes de redirecionar
     }
   </script>
+
 </body>
 </html>
