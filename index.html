@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Obrigado pela compra!</title>
-  <!-- PIXEL DO FACEBOOK -->
+
+  <!-- PIXEL FACEBOOK -->
   <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1193017659526800'); // SEU PIXEL
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1193017659526800'); // SEU PIXEL ID
     fbq('track', 'PageView');
   </script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #ffffff;
+      background: #fff;
       margin: 0;
       padding: 0;
       text-align: center;
@@ -31,10 +33,10 @@
       padding: 20px;
     }
     h1 {
-      color: #2ecc71;
+      color: #27ae60;
     }
     button {
-      background-color: #2ecc71;
+      background-color: #27ae60;
       color: white;
       border: none;
       padding: 15px;
@@ -42,29 +44,25 @@
       border-radius: 8px;
       width: 100%;
       margin-top: 20px;
+      cursor: pointer;
     }
     button:disabled {
-      background-color: #bbb;
+      background-color: #aaa;
+      cursor: not-allowed;
     }
     #codigo {
-      font-size: 22px;
+      font-size: 20px;
       margin-top: 20px;
       font-weight: bold;
-    }
-    p {
-      font-size: 16px;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>✅ Obrigado pela sua compra!</h1>
-    <p>Clique no botão abaixo para gerar seu código de compra e me envie no WhatsApp.</p>
-
-    <button onclick="gerarCodigo()" id="botao">Gerar código</button>
-
-    <div id="codigo" style="display:none;"></div>
+    <p>Clique abaixo para gerar seu código de compra e me envie no WhatsApp.</p>
+    <button onclick="gerarCodigo()" id="botao">Gerar código e ir para o WhatsApp</button>
+    <div id="codigo" style="display: none;"></div>
   </div>
 
   <script>
@@ -79,6 +77,15 @@
       fbq('track', 'Purchase');
 
       localStorage.setItem("compraMarcada", "true");
+
+      // Redireciona para o WhatsApp com o código gerado
+      const numero = "5599999999999"; // ⬅️ TROQUE PELO SEU NÚMERO com DDD e país (ex: 55 + DDD + número)
+      const mensagem = `Meu código de compra é ${codigo}`;
+      const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+      setTimeout(() => {
+        window.location.href = link;
+      }, 2000); // Espera 2 segundos para mostrar o código antes de redirecionar
     }
   </script>
 </body>
