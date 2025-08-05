@@ -8,13 +8,15 @@
   <!-- PIXEL FACEBOOK -->
   <script>
     !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(f.fbq)return;n=f.fbq=function(){
+        n.callMethod? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+      };
       if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
       n.queue=[];t=b.createElement(e);t.async=!0;
       t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
     fbq('init', '1193017659526800'); // SEU PIXEL ID
     fbq('track', 'PageView');
   </script>
@@ -22,7 +24,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #fff;
+      background: #f8f8f8;
       margin: 0;
       padding: 0;
       text-align: center;
@@ -30,20 +32,23 @@
     .container {
       max-width: 400px;
       margin: auto;
-      padding: 20px;
+      padding: 30px 20px;
     }
     h1 {
       color: #27ae60;
     }
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
     button {
-      background-color: #27ae60;
+      background-color: #25D366;
       color: white;
       border: none;
       padding: 15px;
       font-size: 18px;
       border-radius: 8px;
       width: 100%;
-      margin-top: 20px;
       cursor: pointer;
     }
     button:disabled {
@@ -54,6 +59,7 @@
       font-size: 20px;
       margin-top: 20px;
       font-weight: bold;
+      color: #333;
     }
   </style>
 </head>
@@ -61,32 +67,41 @@
   <div class="container">
     <h1>✅ Obrigado pela sua compra!</h1>
     <p>Clique abaixo para gerar seu código de compra e me envie no WhatsApp.</p>
-    <button onclick="gerarCodigo()" id="botao">Gerar código e ir para o WhatsApp</button>
+    <button id="botao">Gerar código e ir para o WhatsApp</button>
     <div id="codigo" style="display: none;"></div>
   </div>
 
   <script>
-    function gerarCodigo() {
-      if (localStorage.getItem("compraMarcada")) return;
+    document.getElementById("botao").addEventListener("click", function() {
+      // Impede que gere novamente
+      if (localStorage.getItem("compraMarcada")) {
+        alert("Você já gerou seu código.");
+        return;
+      }
 
+      // Gera código aleatório de 1 a 200
       const codigo = Math.floor(Math.random() * 200) + 1;
       document.getElementById("codigo").innerText = "Seu código: " + codigo;
       document.getElementById("codigo").style.display = "block";
       document.getElementById("botao").disabled = true;
 
-      fbq('track', 'Purchase');
-
+      // Marca como já marcado
       localStorage.setItem("compraMarcada", "true");
 
-      // Redireciona para o WhatsApp com o código gerado
-      const numero = "5599999999999"; // ⬅️ TROQUE PELO SEU NÚMERO com DDD e país (ex: 55 + DDD + número)
+      // Dispara evento do Pixel
+      if (typeof fbq !== "undefined") {
+        fbq('track', 'Purchase');
+      }
+
+      // Redireciona para o WhatsApp
+      const numero = "5599999999999"; // << TROQUE PELO SEU NÚMERO com DDD
       const mensagem = `Meu código de compra é ${codigo}`;
       const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
       setTimeout(() => {
         window.location.href = link;
-      }, 2000); // Espera 2 segundos para mostrar o código antes de redirecionar
-    }
+      }, 2000);
+    });
   </script>
 </body>
 </html>
