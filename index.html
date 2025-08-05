@@ -13,29 +13,79 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1193017659526800'); // Seu ID do pixel aqui
+    fbq('init', '1193017659526800'); // Seu ID do Pixel
     fbq('track', 'PageView');
   </script>
   <!-- End Facebook Pixel Code -->
+  
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+    .frase { font-size: 1.2em; margin-bottom: 15px; }
+    .codigo { font-size: 1.5em; margin: 20px 0; font-weight: bold; }
+    button {
+      background-color: #25d366; /* verde WhatsApp */
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: gray;
+      cursor: default;
+    }
+  </style>
 </head>
 <body>
   <h1>Obrigado pela sua compra!</h1>
-  <p>Seu pedido foi recebido com sucesso.</p>
-
+  <p class="frase">Gere sua compra e me mande no WhatsApp</p>
+  <div class="codigo" id="codigoCompra">Gerando...</div>
+  <button id="btnConfirmar">Confirmar e Receber Conteúdo no WhatsApp</button>
+  
   <script>
-    // Função para disparar o evento de compra no pixel
-    function dispararEventoCompra() {
-      fbq('track', 'Purchase');
-      console.log('Evento Purchase disparado.');
+    // Função para gerar código aleatório
+    function gerarCodigo(tamanho = 8) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let codigo = '';
+      for (let i = 0; i < tamanho; i++) {
+        codigo += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return codigo;
     }
 
-    // Verifica se já disparou o evento anteriormente
-    if (!localStorage.getItem('pixelCompraDisparado')) {
-      dispararEventoCompra();
-      localStorage.setItem('pixelCompraDisparado', 'true');
-    } else {
-      console.log('Evento Purchase já foi disparado antes, não dispara novamente.');
+    // Exibir código gerado
+    const codigoCompra = gerarCodigo();
+    document.getElementById('codigoCompra').innerText = codigoCompra;
+
+    // Função para disparar evento purchase só uma vez
+    function dispararEventoCompra() {
+      if (!localStorage.getItem('pixelCompraDisparado')) {
+        fbq('track', 'Purchase');
+        localStorage.setItem('pixelCompraDisparado', 'true');
+        console.log('Evento Purchase disparado.');
+      } else {
+        console.log('Evento Purchase já foi disparado antes.');
+      }
     }
+
+    // Botão confirmar
+    const btn = document.getElementById('btnConfirmar');
+    btn.addEventListener('click', () => {
+      dispararEventoCompra();
+      btn.disabled = true;
+      btn.innerText = 'Redirecionando...';
+
+      // Link do WhatsApp - insira seu número e mensagem aqui
+      const numeroWhats = '5511999999999'; // coloque seu número aqui, com DDD e país
+      const mensagem = encodeURIComponent(`Olá, fiz a compra e meu código é: ${codigoCompra}`);
+      const urlWhats = `https://wa.me/${numeroWhats}?text=${mensagem}`;
+
+      // Redirecionar após 1 segundo pra dar tempo de disparar pixel
+      setTimeout(() => {
+        window.location.href = urlWhats;
+      }, 1000);
+    });
   </script>
 </body>
 </html>
