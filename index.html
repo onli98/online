@@ -2,10 +2,38 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Obrigado pela sua compra!</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parabéns pela compra!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #005F56;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2em;
+      margin: 0.5em 0;
+    }
+    p {
+      margin: 0.5em 0;
+    }
+    #countdown {
+      font-size: 3em;
+      font-weight: bold;
+      color: #00FF80;
+    }
+  </style>
 
-  <!-- Meta Pixel Code -->
+  <!-- Pixel do Facebook -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -15,74 +43,33 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    
-    fbq('init', '1193017659526800'); // seu pixel
-    fbq('track', 'PageView');
+    fbq('init', '1193017659526800');
+    fbq('track', 'Purchase');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=1193017659526800&ev=PageView&noscript=1"/>
+         src="https://www.facebook.com/tr?id=1193017659526800&ev=Purchase&noscript=1"/>
   </noscript>
-  <!-- End Meta Pixel Code -->
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      text-align: center;
-      padding: 40px;
-    }
-
-    h1 {
-      color: #27ae60;
-    }
-
-    p {
-      font-size: 18px;
-      margin-top: 10px;
-    }
-
-    .codigo {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 30px;
-      background-color: #25D366;
-      color: white;
-      padding: 15px 25px;
-      font-size: 18px;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-  </style>
 </head>
 <body>
 
-  <h1>✅ Obrigado pela sua compra!</h1>
-  <p>Este é seu código de compra. Copie e envie no WhatsApp:</p>
-
-  <div class="codigo" id="codigo"></div>
-
-  <a id="zapLink" class="button" href="#" target="_blank">Enviar no WhatsApp</a>
+  <h1>🎊 Parabéns pela compra 🎊</h1>
+  <p>Acesso liberado em...</p>
+  <div id="countdown">3</div>
 
   <script>
-    // Gera código automático entre 1 e 200
-    const codigo = Math.floor(Math.random() * 200) + 1;
-    document.getElementById('codigo').innerText = "Código: " + codigo;
+    let seconds = 3;
+    const countdownElement = document.getElementById("countdown");
 
-    // Define link do WhatsApp
-    const linkZap = `https://wa.me/5599999999999?text=Olá!%20Meu%20código%20de%20compra%20é%20${codigo}`;
-    document.getElementById('zapLink').href = linkZap;
-
-    // Marca a venda no Pixel automaticamente
-    fbq('track', 'Purchase', {
-      value: 0.00,
-      currency: 'BRL'
-    });
+    const countdown = setInterval(() => {
+      seconds--;
+      countdownElement.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        // Substitua abaixo pelo seu link real de WhatsApp
+        window.location.href = "https://wa.me/5511999999999?text=Olá,+acabei+de+realizar+a+compra!";
+      }
+    }, 1000);
   </script>
 
 </body>
