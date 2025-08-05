@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Obrigado pela Compra!</title>
-  <!-- Facebook Pixel Code -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obrigado pela compra!</title>
+  <!-- PIXEL DO FACEBOOK -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -13,74 +14,72 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1193017659526800'); // Seu ID do Pixel
+    fbq('init', '1193017659526800'); // SEU PIXEL
     fbq('track', 'PageView');
   </script>
-  <!-- End Facebook Pixel Code -->
-  
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
-    .frase { font-size: 1.2em; margin-bottom: 15px; }
-    .codigo { font-size: 1.5em; margin: 20px 0; font-weight: bold; letter-spacing: 5px; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #2ecc71;
+    }
     button {
-      background-color: #25d366; /* verde WhatsApp */
+      background-color: #2ecc71;
       color: white;
       border: none;
-      padding: 15px 30px;
-      font-size: 1.2em;
+      padding: 15px;
+      font-size: 18px;
       border-radius: 8px;
-      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
     }
     button:disabled {
-      background-color: gray;
-      cursor: default;
+      background-color: #bbb;
+    }
+    #codigo {
+      font-size: 22px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    p {
+      font-size: 16px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Obrigado pela sua compra!</h1>
-  <p class="frase">Gere sua compra e me mande no WhatsApp</p>
-  <div class="codigo" id="codigoCompra">Gerando...</div>
-  <button id="btnConfirmar">Confirmar e Receber Conteúdo no WhatsApp</button>
-  
+  <div class="container">
+    <h1>✅ Obrigado pela sua compra!</h1>
+    <p>Clique no botão abaixo para gerar seu código de compra e me envie no WhatsApp.</p>
+
+    <button onclick="gerarCodigo()" id="botao">Gerar código e marcar compra</button>
+
+    <div id="codigo" style="display:none;"></div>
+  </div>
+
   <script>
-    // Gera número aleatório entre 1 e 200
-    function gerarCodigoNumero() {
-      return Math.floor(Math.random() * 200) + 1;
+    function gerarCodigo() {
+      if (localStorage.getItem("compraMarcada")) return;
+
+      const codigo = Math.floor(Math.random() * 200) + 1;
+      document.getElementById("codigo").innerText = "Seu código: " + codigo;
+      document.getElementById("codigo").style.display = "block";
+      document.getElementById("botao").disabled = true;
+
+      fbq('track', 'Purchase');
+
+      localStorage.setItem("compraMarcada", "true");
     }
-
-    // Exibir código gerado
-    const codigoCompra = gerarCodigoNumero();
-    document.getElementById('codigoCompra').innerText = codigoCompra;
-
-    // Função para disparar evento purchase só uma vez
-    function dispararEventoCompra() {
-      if (!localStorage.getItem('pixelCompraDisparado')) {
-        fbq('track', 'Purchase');
-        localStorage.setItem('pixelCompraDisparado', 'true');
-        console.log('Evento Purchase disparado.');
-      } else {
-        console.log('Evento Purchase já foi disparado antes.');
-      }
-    }
-
-    // Botão confirmar
-    const btn = document.getElementById('btnConfirmar');
-    btn.addEventListener('click', () => {
-      dispararEventoCompra();
-      btn.disabled = true;
-      btn.innerText = 'Redirecionando...';
-
-      // Link do WhatsApp - insira seu número e mensagem aqui
-      const numeroWhats = '5511999999999'; // coloque seu número aqui, com DDD e país
-      const mensagem = encodeURIComponent(`Olá, fiz a compra e meu código é: ${codigoCompra}`);
-      const urlWhats = `https://wa.me/${numeroWhats}?text=${mensagem}`;
-
-      // Redirecionar após 1 segundo pra dar tempo de disparar pixel
-      setTimeout(() => {
-        window.location.href = urlWhats;
-      }, 1000);
-    });
   </script>
 </body>
 </html>
