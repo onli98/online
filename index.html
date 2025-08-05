@@ -1,62 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Obrigado pela compra!</title>
 
-  <!-- PIXEL FACEBOOK -->
+  <!-- Meta Pixel Code -->
   <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){
-        n.callMethod? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
-      };
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', '1193017659526800'); // SEU PIXEL ID
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1193017659526800');
     fbq('track', 'PageView');
   </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1193017659526800&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f8f8f8;
-      margin: 0;
-      padding: 0;
+      background-color: #f9f9f9;
       text-align: center;
-    }
-    .container {
-      max-width: 400px;
-      margin: auto;
-      padding: 30px 20px;
+      padding: 40px 20px;
     }
     h1 {
-      color: #27ae60;
+      color: #00c851;
     }
     p {
-      font-size: 16px;
-      margin-bottom: 20px;
+      font-size: 18px;
+      margin-bottom: 30px;
     }
-    button {
+    #btn {
       background-color: #25D366;
       color: white;
-      border: none;
-      padding: 15px;
+      padding: 15px 25px;
       font-size: 18px;
+      border: none;
       border-radius: 8px;
-      width: 100%;
       cursor: pointer;
     }
-    button:disabled {
-      background-color: #aaa;
-      cursor: not-allowed;
-    }
     #codigo {
-      font-size: 20px;
+      font-size: 22px;
       margin-top: 20px;
       font-weight: bold;
       color: #333;
@@ -64,44 +56,38 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>✅ Obrigado pela sua compra!</h1>
-    <p>Clique abaixo para gerar seu código de compra e me envie no WhatsApp.</p>
-    <button id="botao">Gerar código e ir para o WhatsApp</button>
-    <div id="codigo" style="display: none;"></div>
-  </div>
+  <h1>✅ Obrigado pela sua compra!</h1>
+  <p>Clique no botão abaixo para gerar seu código de compra e envie no WhatsApp.</p>
+
+  <button id="btn" onclick="gerarCodigo()">Gerar código e ir para o WhatsApp</button>
+
+  <div id="codigo"></div>
 
   <script>
-    document.getElementById("botao").addEventListener("click", function() {
-      // Impede que gere novamente
-      if (localStorage.getItem("compraMarcada")) {
+    function gerarCodigo() {
+      // Evitar múltiplas marcações
+      if (localStorage.getItem('vendaRegistrada')) {
         alert("Você já gerou seu código.");
         return;
       }
 
-      // Gera código aleatório de 1 a 200
-      const codigo = Math.floor(Math.random() * 200) + 1;
-      document.getElementById("codigo").innerText = "Seu código: " + codigo;
-      document.getElementById("codigo").style.display = "block";
-      document.getElementById("botao").disabled = true;
+      // Gera número aleatório entre 1 e 200
+      var numero = Math.floor(Math.random() * 200) + 1;
 
-      // Marca como já marcado
-      localStorage.setItem("compraMarcada", "true");
+      // Mostra na tela
+      document.getElementById("codigo").innerText = "Seu código: #" + numero;
 
-      // Dispara evento do Pixel
-      if (typeof fbq !== "undefined") {
-        fbq('track', 'Purchase');
-      }
+      // Marca o evento de compra
+      fbq('track', 'Purchase');
 
-      // Redireciona para o WhatsApp
-      const numero = "5599999999999"; // << TROQUE PELO SEU NÚMERO com DDD
-      const mensagem = `Meu código de compra é ${codigo}`;
-      const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      // Salva localmente pra não marcar de novo
+      localStorage.setItem('vendaRegistrada', 'true');
 
-      setTimeout(() => {
-        window.location.href = link;
+      // Redireciona para WhatsApp após 2 segundos
+      setTimeout(function() {
+        window.location.href = "https://wa.me/5599999999999?text=Meu%20código%20de%20compra%20é%20%23" + numero;
       }, 2000);
-    });
+    }
   </script>
 </body>
 </html>
