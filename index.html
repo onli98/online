@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <title>Compra Confirmada</title>
-
-    <!-- Meta Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1193017659526800'); 
-      fbq('track', 'PageView');
-      fbq('track', 'Purchase');  <!-- Evento de compra simples -->
-    </script>
-    <noscript>
-      <img height="1" width="1" 
-      src="https://www.facebook.com/tr?id=1193017659526800&ev=PageView&noscript=1"/>
-    </noscript>
-    <!-- End Meta Pixel Code -->
-
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f0fff4; }
-        h1 { color: #28a745; }
-        p { font-size: 18px; }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Obrigado pela Compra!</title>
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1193017659526800'); // Seu ID do pixel aqui
+    fbq('track', 'PageView');
+  </script>
+  <!-- End Facebook Pixel Code -->
 </head>
 <body>
-    <h1>✅ Compra Confirmada!</h1>
-    <p>Obrigado por sua compra. Você receberá os detalhes no WhatsApp em instantes.</p>
+  <h1>Obrigado pela sua compra!</h1>
+  <p>Seu pedido foi recebido com sucesso.</p>
+
+  <script>
+    // Função para disparar o evento de compra no pixel
+    function dispararEventoCompra() {
+      fbq('track', 'Purchase');
+      console.log('Evento Purchase disparado.');
+    }
+
+    // Verifica se já disparou o evento anteriormente
+    if (!localStorage.getItem('pixelCompraDisparado')) {
+      dispararEventoCompra();
+      localStorage.setItem('pixelCompraDisparado', 'true');
+    } else {
+      console.log('Evento Purchase já foi disparado antes, não dispara novamente.');
+    }
+  </script>
 </body>
 </html>
