@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Obrigado pela sua compra!!</title>
+  <title>Obrigado pela sua compra!</title>
 
   <!-- Meta Pixel Code -->
   <script>
@@ -15,7 +15,8 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1193017659526800');
+    
+    fbq('init', '1193017659526800'); // seu pixel
     fbq('track', 'PageView');
   </script>
   <noscript>
@@ -27,73 +28,61 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding: 40px;
+      background: #f4f4f4;
       text-align: center;
+      padding: 40px;
     }
 
     h1 {
-      color: #2ecc71;
+      color: #27ae60;
     }
 
     p {
+      font-size: 18px;
       margin-top: 10px;
-      font-size: 18px;
-    }
-
-    button {
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    button:disabled {
-      background-color: gray;
-      cursor: not-allowed;
     }
 
     .codigo {
-      font-size: 22px;
-      margin-top: 20px;
+      font-size: 24px;
       font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 30px;
+      background-color: #25D366;
+      color: white;
+      padding: 15px 25px;
+      font-size: 18px;
+      text-decoration: none;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
   <h1>✅ Obrigado pela sua compra!</h1>
-  <p>Clique abaixo para gerar seu código de compra e me envie no WhatsApp.</p>
+  <p>Este é seu código de compra. Copie e envie no WhatsApp:</p>
 
-  <button id="gerarBtn" onclick="gerarCodigo()">Gerar código e ir para o WhatsApp</button>
+  <div class="codigo" id="codigo"></div>
 
-  <div id="codigo" class="codigo"></div>
+  <a id="zapLink" class="button" href="#" target="_blank">Enviar no WhatsApp</a>
 
   <script>
-    function gerarCodigo() {
-      // Impede cliques adicionais
-      const btn = document.getElementById('gerarBtn');
-      btn.disabled = true;
+    // Gera código automático entre 1 e 200
+    const codigo = Math.floor(Math.random() * 200) + 1;
+    document.getElementById('codigo').innerText = "Código: " + codigo;
 
-      // Gera número de 1 a 200
-      const codigo = Math.floor(Math.random() * 200) + 1;
-      document.getElementById('codigo').innerText = "Seu código: " + codigo;
+    // Define link do WhatsApp
+    const linkZap = `https://wa.me/5599999999999?text=Olá!%20Meu%20código%20de%20compra%20é%20${codigo}`;
+    document.getElementById('zapLink').href = linkZap;
 
-      // Dispara o evento de compra (venda)
-      fbq('track', 'Purchase', {
-        value: 0.00,
-        currency: 'BRL'
-      });
-
-      // Redireciona com o código no WhatsApp
-      setTimeout(() => {
-        window.location.href = `https://wa.me/5599999999999?text=Olá!%20Meu%20código%20de%20compra%20é%20${codigo}`;
-      }, 2000); // espera 2 segundos antes de redirecionar
-    }
+    // Marca a venda no Pixel automaticamente
+    fbq('track', 'Purchase', {
+      value: 0.00,
+      currency: 'BRL'
+    });
   </script>
 
 </body>
