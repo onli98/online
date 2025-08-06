@@ -2,38 +2,57 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Obrigado pela compra!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parabéns pela compra!</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Estilo -->
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: #005F56;
-      color: white;
-      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333333;
+      font-family: 'Inter', sans-serif;
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       height: 100vh;
       text-align: center;
     }
+
     h1 {
-      font-size: 2em;
-      margin: 0.5em 0;
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
     }
+
     p {
-      margin: 0.5em 0;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #666666;
     }
-    #countdown {
-      font-size: 3em;
-      font-weight: bold;
-      color: #00FF80;
+
+    .botao {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .botao:hover {
+      background-color: #0c5ed7;
     }
   </style>
 
-  <!-- Pixel do Facebook -->
+  <!-- Facebook Pixel -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -43,34 +62,38 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1193017659526800');
-    fbq('track', 'Purchase');
+
+    fbq('init', '1193017659526800'); // Seu Pixel ID
+    fbq('track', 'PageView'); // Página visualizada
   </script>
+
   <noscript>
     <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=1193017659526800&ev=Purchase&noscript=1"/>
+         src="https://www.facebook.com/tr?id=1193017659526800&ev=PageView&noscript=1"/>
   </noscript>
 </head>
 <body>
+  <h1>🎉 Obrigado pela compra!</h1>
+  <p>Seu acesso está liberado. Clique no botão abaixo para acessar o conteúdo:</p>
 
-  <h1>🎊 Parabéns pela compra 🎊</h1>
-  <p>Acesso liberado em...</p>
-  <div id="countdown">3</div>
+  <button class="botao" onclick="acessarConteudo()">Acessar Conteúdo</button>
 
   <script>
-    let seconds = 3;
-    const countdownElement = document.getElementById("countdown");
+    function acessarConteudo() {
+      // Checa se o evento já foi marcado
+      const jaMarcado = localStorage.getItem("eventoPurchaseMarcado");
 
-    const countdown = setInterval(() => {
-      seconds--;
-      countdownElement.textContent = seconds;
-      if (seconds <= 0) {
-        clearInterval(countdown);
-        // Substitua abaixo pelo seu link real de WhatsApp
-        window.location.href = "https://wa.me/5511999999999?text=Olá,+acabei+de+realizar+a+compra!";
+      if (!jaMarcado) {
+        fbq('track', 'Purchase', {
+          value: 1.00,
+          currency: 'BRL'
+        });
+        localStorage.setItem("eventoPurchaseMarcado", "true");
       }
-    }, 1000);
-  </script>
 
+      // Redireciona para o Drive
+      window.location.href = "https://drive.google.com/drive/folders/1odDv7WZn3cfsXuPrdklo-dWcPeSch8q2?usp=sharing";
+    }
+  </script>
 </body>
 </html>
