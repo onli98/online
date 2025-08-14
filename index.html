@@ -74,6 +74,8 @@
       font-weight: bold;
       cursor: pointer;
       text-transform: uppercase;
+      text-decoration: none;
+      display: block;
     }
 
     .progress-container {
@@ -108,6 +110,8 @@
       font-size: 16px;
       text-transform: uppercase;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
       margin-bottom: 50px;
     }
   </style>
@@ -127,7 +131,7 @@
     <!-- Raspadinha 1 -->
     <div class="card">
       <img src="https://i.postimg.cc/rF2cpt9Z/Captura-de-tela-2025-08-14-173408.png" alt="Raspadinha 1">
-      <button class="card-button">Raspadinha 1$</button>
+      <a href="https://raspadadasorte.site/cadastro?ref=934" class="card-button" target="_blank">Raspadinha 1$</a>
       <div class="progress-container">
         <div class="progress-bar">
           <div class="progress" id="progress1" style="width: 84%; background-color: #00ff9d;"></div>
@@ -139,7 +143,7 @@
     <!-- Raspadinha 2 -->
     <div class="card">
       <img src="https://i.postimg.cc/hPnWnRSH/Captura-de-tela-2025-08-14-173419.png" alt="Raspadinha 2">
-      <button class="card-button">Raspadinha 2$</button>
+      <a href="https://raspadadasorte.site/cadastro?ref=934" class="card-button" target="_blank">Raspadinha 2$</a>
       <div class="progress-container">
         <div class="progress-bar">
           <div class="progress" id="progress2" style="width: 71%; background-color: #ffd700;"></div>
@@ -151,7 +155,7 @@
     <!-- Raspadinha 10 -->
     <div class="card">
       <img src="https://i.postimg.cc/TY0SXyND/Captura-de-tela-2025-08-14-173423.png" alt="Raspadinha 3">
-      <button class="card-button">Raspadinha 10$</button>
+      <a href="https://raspadadasorte.site/cadastro?ref=934" class="card-button" target="_blank">Raspadinha 10$</a>
       <div class="progress-container">
         <div class="progress-bar">
           <div class="progress" id="progress3" style="width: 85%; background-color: #00ff9d;"></div>
@@ -163,7 +167,7 @@
     <!-- Raspadinha 25 -->
     <div class="card">
       <img src="https://i.postimg.cc/7L2mbb9X/Captura-de-tela-2025-08-14-173428.png" alt="Raspadinha 4">
-      <button class="card-button">Raspadinha 25$</button>
+      <a href="https://raspadadasorte.site/cadastro?ref=934" class="card-button" target="_blank">Raspadinha 25$</a>
       <div class="progress-container">
         <div class="progress-bar">
           <div class="progress" id="progress4" style="width: 68%; background-color: #ffd700;"></div>
@@ -173,10 +177,11 @@
     </div>
   </div>
 
-  <button class="main-button">CRIAR NOVA CONTA</button>
+  <!-- Botão principal -->
+  <a href="https://raspadadasorte.site/cadastro?ref=934" class="main-button" target="_blank">CRIAR NOVA CONTA</a>
 
   <script>
-    function animatePercentage(idProgress, idText, initial, min, max, color) {
+    function animatePercentage(idProgress, idText, initial, min, max) {
       let current = initial;
       let direction = 1;
 
@@ -189,10 +194,10 @@
       }, 1000 + Math.random() * 1000);
     }
 
-    animatePercentage("progress1", "percent1", 84, 82, 87, "#00ff9d");
-    animatePercentage("progress2", "percent2", 71, 68, 74, "#ffd700");
-    animatePercentage("progress3", "percent3", 85, 83, 88, "#00ff9d");
-    animatePercentage("progress4", "percent4", 68, 65, 70, "#ffd700");
+    animatePercentage("progress1", "percent1", 84, 82, 87);
+    animatePercentage("progress2", "percent2", 71, 68, 74);
+    animatePercentage("progress3", "percent3", 85, 83, 88);
+    animatePercentage("progress4", "percent4", 68, 65, 70);
   </script>
 
 </body>
