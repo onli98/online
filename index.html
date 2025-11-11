@@ -1,60 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Redirecionando...</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #07172F; /* Azul escuro chamativo */
-            color: #FFFFFF;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            margin: 0;
-        }
-        .container {
-            max-width: 330px;
-            padding: 0 20px;
-        }
-        h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        p {
-            font-size: 15px;
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-        .loader {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255,255,255,0.3);
-            border-top-color: #ffffff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
-    <script>
-        setTimeout(function() {
-            window.location.href = "https://wa.me/5511967067946";
-        }, 2000);
-    </script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Redirecionando...</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#07172F;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+  .box{max-width:360px;padding:20px;text-align:center}
+  h1{font-size:22px;margin:0 0 8px}
+  p{margin:0 0 16px;opacity:.9}
+  .loader{width:46px;height:46px;border-radius:50%;border:5px solid rgba(255,255,255,0.18);border-top-color:#fff;animation:spin .8s linear infinite;margin:0 auto}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1751617688871551');
+  fbq('track', 'ViewContent');
+</script>
+<!-- End Meta Pixel Code -->
+<script>
+  // tempo de redirecionamento em ms
+  var redirectDelay = 2000;
+  // número do WhatsApp (coloque o seu)
+  var wa = "https://wa.me/5511967067946";
+  setTimeout(function(){
+    window.location.href = wa;
+  }, redirectDelay);
+</script>
 </head>
 <body>
-    <div class="container">
-        <h2>🔵 Aguarde...</h2>
-        <p>Estamos te redirecionando para o atendimento</p>
-        <div class="loader"></div>
-    </div>
+  <div class="box">
+    <h1>🔵 Aguarde...</h1>
+    <p>Estamos te redirecionando para o atendimento. Não feche a aba.</p>
+    <div class="loader"></div>
+  </div>
 </body>
 </html>
-
