@@ -1,45 +1,162 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Redirecionando...</title>
-<style>
-  body{font-family:Arial,Helvetica,sans-serif;background:#07172F;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
-  .box{max-width:360px;padding:20px;text-align:center}
-  h1{font-size:22px;margin:0 0 8px}
-  p{margin:0 0 16px;opacity:.9}
-  .loader{width:46px;height:46px;border-radius:50%;border:5px solid rgba(255,255,255,0.18);border-top-color:#fff;animation:spin .8s linear infinite;margin:0 auto}
-  @keyframes spin{to{transform:rotate(360deg)}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A CARTA DE PAULO — Área de Estudos</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Inter, sans-serif;
+      background:#0b0e14;
+      color:#fff;
+    }
+    header{
+      text-align:center;
+      padding:40px 20px;
+    }
+    h1{
+      margin:0;
+      font-size:34px;
+      letter-spacing:1px;
+      font-weight:700;
+    }
+    p.sub{
+      margin-top:8px;
+      color:#9aa4b2;
+      font-size:15px;
+    }
 
-<!-- Meta Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1751617688871551');
-  fbq('track', 'ViewContent');
-</script>
-<!-- End Meta Pixel Code -->
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:20px;
+    }
 
-<script>
-  // Redirecionamento instantâneo
-  var wa = "https://wa.me/5521996296458?text=Ol%C3%A1!%20Tenho%20interesse%20e%20queria%20mais%20informa%C3%A7%C3%B5es%2C%20por%20favor.";
-  window.location.replace(wa);
-</script>
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:22px;
+    }
 
+    .book{
+      background:#11141b;
+      border:1px solid #1d2430;
+      border-radius:14px;
+      overflow:hidden;
+      transition:0.25s;
+      cursor:pointer;
+    }
+    .book:hover{
+      transform:scale(1.03);
+      box-shadow:0 0 20px rgba(255,255,255,0.05);
+    }
+
+    .cover{
+      width:100%;
+      height:300px;
+      background:#1a1f28;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      color:#6c7380;
+    }
+
+    .info{
+      padding:16px;
+    }
+    .info h3{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:600;
+    }
+    .info p{
+      margin:0;
+      font-size:13px;
+      color:#9aa4b2;
+    }
+
+    .viewer{
+      margin-top:40px;
+      background:#0f1320;
+      border-radius:16px;
+      padding:20px;
+      display:none;
+    }
+    .viewer iframe{
+      width:100%;
+      height:85vh;
+      border:0;
+      border-radius:12px;
+      background:#000;
+    }
+    .viewer h2{
+      margin:0 0 12px;
+      font-size:22px;
+      font-weight:700;
+    }
+
+  </style>
 </head>
 <body>
-  <div class="box">
-    <h1>🔵 Aguarde...</h1>
-    <p>Estamos te redirecionando para o atendimento. Não feche a aba!</p>
-    <div class="loader"></div>
-  </div>
+  <header>
+    <h1>A CARTA DE PAULO</h1>
+    <p class="sub">Área de estudo completa — Tudo organizado e aberto direto na página</p>
+  </header>
+
+  <main class="container">
+
+    <section class="grid" id="books">
+      <!-- Os 10 livros -->
+      <div class="book" onclick="openPDF('Cartas de Paulo a Timóteo — Guia Completo', 'Cartas-de-Paulo-a-Timoteo-Um-Guia-Completo.pdf')">
+        <div class="cover">Capa — Timóteo</div>
+        <div class="info"><h3>Cartas a Timóteo</h3><p>Guia Completo</p></div>
+      </div>
+
+      <div class="book" onclick="openPDF('Cartas aos Tessalonicenses — Jornada Espiritual', 'Cartas-aos-Tessalonicenses-Uma-Jornada-Espiritual.pdf')">
+        <div class="cover">Capa — Tessalonicenses</div>
+        <div class="info"><h3>Tessalonicenses</h3><p>Jornada Espiritual</p></div>
+      </div>
+
+      <div class="book" onclick="openPDF('Carta de Paulo a Tito — Versículo por Versículo', 'Carta-de-Paulo-a-Tito-Um-Guia-Versiculo-por-Versiculo.pdf')">
+        <div class="cover">Capa — Tito</div>
+        <div class="info"><h3>Tito</h3><p>Versículo por Versículo</p></div>
+      </div>
+
+      <div class="book" onclick="openPDF('Carta de Paulo aos Efésios — Jornada Espiritual', 'Carta-de-Paulo-aos-Efesios-Uma-Jornada-Espiritual .pdf')">
+        <div class="cover">Capa — Efésios</div>
+        <div class="info"><h3>Efésios</h3><p>Jornada Espiritual</p></div>
+      </div>
+
+      <div class="book" onclick="openPDF('Carta de Paulo a Filemom — Estudo Profundo', 'Carta-de-Paulo-a-Filemom-Um-Estudo-Profundo.pdf')">
+        <div class="cover">Capa — Filemom</div>
+        <div class="info"><h3>Filemom</h3><p>Estudo Profundo</p></div>
+      </div>
+
+      <!-- Aguardando mais PDFs para completar os 10 livros -->
+      <!-- Cada card terá capa, título e abrirá o PDF na visualização interna -->
+    </section>
+
+    <section class="viewer" id="viewer">
+      <h2 id="viewerTitle"></h2>
+      <iframe id="viewerFrame"></iframe>
+    </section>
+
+  </main>
+
+  <script>
+    // Quando você mandar os PDFs, eu coloco aqui os títulos, capas e links diretos.
+    // Depois atualizo este script com a lista final.
+
+    function openPDF(title, url){
+      const viewer = document.getElementById('viewer');
+      document.getElementById('viewerTitle').textContent = title;
+      document.getElementById('viewerFrame').src = url;
+      viewer.style.display = 'block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  </script>
+
 </body>
 </html>
