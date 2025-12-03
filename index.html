@@ -1,58 +1,86 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudo das Cartas de Paulo</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>A CARTA DE PAULO – Área de Estudo</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        header {
+            background: #3f51b5;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: scale(1.03);
+        }
+        .card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+        }
+        .card-title {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            height: 90vh;
+            border: none;
+            margin-top: 30px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-
-    <header class="app-header">
-        <div class="header-content">
-            <h1 class="app-title">Cartas de Paulo</h1>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
-                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M10 2v2m0 16v2M10 5a5 5 0 00-5 5 5 5 0 005 5 5 5 0 005-5 5 5 0 00-5-5m0 0V9m0 6v3m-6-9h6m-6 0h.01M9 16h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            </button>
-        </div>
-    </header>
-
-    <nav class="top-nav">
-        <div class="nav-content">
-            <ul id="epistles-list">
-                <!-- A lista de cartas será inserida aqui pelo JavaScript -->
-            </ul>
-        </div>
-    </nav>
+    <header>A CARTA DE PAULO – Biblioteca de Estudos</header>
 
     <div class="container">
-        <aside class="sidebar" id="sidebar">
-            <h2 class="sidebar-title">Sumário</h2>
-            <ul id="chapter-list">
-                <!-- A lista de capítulos será inserida aqui pelo JavaScript -->
-            </ul>
-        </aside>
-
-        <main class="main-content" id="main-content">
-            <div class="content-wrapper">
-                <article id="epistle-content">
-                    <div class="welcome-message">
-                        <h2>Bem-vindo ao Estudo das Cartas de Paulo</h2>
-                        <p>Selecione uma carta no menu superior para começar sua jornada de estudo. O sumário do capítulo aparecerá aqui à esquerda para navegação rápida.</p>
-                    </div>
-                </article>
+        <div class="grid">
+            <div class="card" onclick="abrirPDF('Carta-aos-Romanos-Aula-01-Capa-Final.pdf')">
+                <img src="Carta-aos-Romanos-Aula-01-Capa-Final.pdf" alt="Capa PDF">
+                <div class="card-title">Romanos – Aula 01</div>
             </div>
-        </main>
+        </div>
+
+        <iframe id="visorPDF"></iframe>
     </div>
 
-    <footer class="app-footer">
-        <p>&copy; 2024 - Estudo das Cartas de Paulo. Conteúdo para fins educacionais.</p>
-    </footer>
+    <script>
+        function abrirPDF(arquivo) {
+            const visor = document.getElementById('visorPDF');
+            visor.src = arquivo;
+            visor.style.display = 'block';
+            window.scrollTo({ top: visor.offsetTop, behavior: 'smooth' });
+        }
+    </script>
 
-    <script src="script.js"></script>
 </body>
 </html>
