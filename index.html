@@ -1,162 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>A CARTA DE PAULO — Área de Estudos</title>
-  <style>
-    body{
-      margin:0;
-      font-family:Inter, sans-serif;
-      background:#0b0e14;
-      color:#fff;
-    }
-    header{
-      text-align:center;
-      padding:40px 20px;
-    }
-    h1{
-      margin:0;
-      font-size:34px;
-      letter-spacing:1px;
-      font-weight:700;
-    }
-    p.sub{
-      margin-top:8px;
-      color:#9aa4b2;
-      font-size:15px;
-    }
-
-    .container{
-      max-width:1200px;
-      margin:0 auto;
-      padding:20px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:22px;
-    }
-
-    .book{
-      background:#11141b;
-      border:1px solid #1d2430;
-      border-radius:14px;
-      overflow:hidden;
-      transition:0.25s;
-      cursor:pointer;
-    }
-    .book:hover{
-      transform:scale(1.03);
-      box-shadow:0 0 20px rgba(255,255,255,0.05);
-    }
-
-    .cover{
-      width:100%;
-      height:300px;
-      background:#1a1f28;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:14px;
-      color:#6c7380;
-    }
-
-    .info{
-      padding:16px;
-    }
-    .info h3{
-      margin:0 0 8px;
-      font-size:18px;
-      font-weight:600;
-    }
-    .info p{
-      margin:0;
-      font-size:13px;
-      color:#9aa4b2;
-    }
-
-    .viewer{
-      margin-top:40px;
-      background:#0f1320;
-      border-radius:16px;
-      padding:20px;
-      display:none;
-    }
-    .viewer iframe{
-      width:100%;
-      height:85vh;
-      border:0;
-      border-radius:12px;
-      background:#000;
-    }
-    .viewer h2{
-      margin:0 0 12px;
-      font-size:22px;
-      font-weight:700;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo das Cartas de Paulo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>A CARTA DE PAULO</h1>
-    <p class="sub">Área de estudo completa — Tudo organizado e aberto direto na página</p>
-  </header>
 
-  <main class="container">
+    <header class="app-header">
+        <div class="header-content">
+            <h1 class="app-title">Cartas de Paulo</h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+                <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M10 2v2m0 16v2M10 5a5 5 0 00-5 5 5 5 0 005 5 5 5 0 005-5 5 5 0 00-5-5m0 0V9m0 6v3m-6-9h6m-6 0h.01M9 16h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </button>
+        </div>
+    </header>
 
-    <section class="grid" id="books">
-      <!-- Os 10 livros -->
-      <div class="book" onclick="openPDF('Cartas de Paulo a Timóteo — Guia Completo', 'Cartas-de-Paulo-a-Timoteo-Um-Guia-Completo.pdf')">
-        <div class="cover">Capa — Timóteo</div>
-        <div class="info"><h3>Cartas a Timóteo</h3><p>Guia Completo</p></div>
-      </div>
+    <nav class="top-nav">
+        <div class="nav-content">
+            <ul id="epistles-list">
+                <!-- A lista de cartas será inserida aqui pelo JavaScript -->
+            </ul>
+        </div>
+    </nav>
 
-      <div class="book" onclick="openPDF('Cartas aos Tessalonicenses — Jornada Espiritual', 'Cartas-aos-Tessalonicenses-Uma-Jornada-Espiritual.pdf')">
-        <div class="cover">Capa — Tessalonicenses</div>
-        <div class="info"><h3>Tessalonicenses</h3><p>Jornada Espiritual</p></div>
-      </div>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <h2 class="sidebar-title">Sumário</h2>
+            <ul id="chapter-list">
+                <!-- A lista de capítulos será inserida aqui pelo JavaScript -->
+            </ul>
+        </aside>
 
-      <div class="book" onclick="openPDF('Carta de Paulo a Tito — Versículo por Versículo', 'Carta-de-Paulo-a-Tito-Um-Guia-Versiculo-por-Versiculo.pdf')">
-        <div class="cover">Capa — Tito</div>
-        <div class="info"><h3>Tito</h3><p>Versículo por Versículo</p></div>
-      </div>
+        <main class="main-content" id="main-content">
+            <div class="content-wrapper">
+                <article id="epistle-content">
+                    <div class="welcome-message">
+                        <h2>Bem-vindo ao Estudo das Cartas de Paulo</h2>
+                        <p>Selecione uma carta no menu superior para começar sua jornada de estudo. O sumário do capítulo aparecerá aqui à esquerda para navegação rápida.</p>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
 
-      <div class="book" onclick="openPDF('Carta de Paulo aos Efésios — Jornada Espiritual', 'Carta-de-Paulo-aos-Efesios-Uma-Jornada-Espiritual.pdf')">
-        <div class="cover">Capa — Efésios</div>
-        <div class="info"><h3>Efésios</h3><p>Jornada Espiritual</p></div>
-      </div>
+    <footer class="app-footer">
+        <p>&copy; 2024 - Estudo das Cartas de Paulo. Conteúdo para fins educacionais.</p>
+    </footer>
 
-      <div class="book" onclick="openPDF('Carta de Paulo a Filemom — Estudo Profundo', 'Carta-de-Paulo-a-Filemom-Um-Estudo-Profundo.pdf')">
-        <div class="cover">Capa — Filemom</div>
-        <div class="info"><h3>Filemom</h3><p>Estudo Profundo</p></div>
-      </div>
-
-      <!-- Aguardando mais PDFs para completar os 10 livros -->
-      <!-- Cada card terá capa, título e abrirá o PDF na visualização interna -->
-    </section>
-
-    <section class="viewer" id="viewer">
-      <h2 id="viewerTitle"></h2>
-      <iframe id="viewerFrame"></iframe>
-    </section>
-
-  </main>
-
-  <script>
-    // Quando você mandar os PDFs, eu coloco aqui os títulos, capas e links diretos.
-    // Depois atualizo este script com a lista final.
-
-    function openPDF(title, url){
-      const viewer = document.getElementById('viewer');
-      document.getElementById('viewerTitle').textContent = title;
-      document.getElementById('viewerFrame').src = url;
-      viewer.style.display = 'block';
-      window.scrollTo({top:0,behavior:'smooth'});
-    }
-  </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
